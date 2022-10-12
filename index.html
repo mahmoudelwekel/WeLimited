@@ -5,9 +5,25 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>WeLimited</title>
     <link rel="icon" href="Logo.png" type="image/png">
 
-    <title>WeLimited</title>
+
+    <link rel="manifest" href="manifest.json" />
+    <!-- ios support -->
+    <link rel="apple-touch-icon" href="images/icons/icon-72x72.png" />
+    <link rel="apple-touch-icon" href="images/icons/icon-96x96.png" />
+    <link rel="apple-touch-icon" href="images/icons/icon-128x128.png" />
+    <link rel="apple-touch-icon" href="images/icons/icon-144x144.png" />
+    <link rel="apple-touch-icon" href="images/icons/icon-152x152.png" />
+    <link rel="apple-touch-icon" href="images/icons/icon-192x192.png" />
+    <link rel="apple-touch-icon" href="images/icons/icon-384x384.png" />
+    <link rel="apple-touch-icon" href="images/icons/icon-512x512.png" />
+    <meta name="apple-mobile-web-app-status-bar" content="#db4938" />
+    <meta name="theme-color" content="#db4938" />
+
+
+
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -64,12 +80,12 @@
                     <hr />
                     <div id="UserData" class="text-right">
                         <div class="form-group">
-                            <label for="StartDate">تاريخ البداية</label>
+                            <label for="StartDate">تاريخ بداية الباقة</label>
                             <input type="date" class="form-control" id="StartDate" onchange="CalculateEndDate();"
                                 required aria-describedby="StartDate">
                         </div>
                         <div class="form-group">
-                            <label for="EndDate">تاريخ النهاية</label>
+                            <label for="EndDate">تاريخ انتهاء الباقة</label>
                             <input type="date" class="form-control" id="EndDate" readonly required
                                 aria-describedby="EndDate">
                         </div>
@@ -127,12 +143,23 @@
                                         aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
-                            <div class="alert text-center" id="AlertMsg" role="alert">
-                                <span></span>
-                                الاستخدام
-                                <span id="IsFair"></span>
-                                و ستستمر الباقة فى العمل حتى يوم
-                                <span id="MayEndAt"></span>
+                            <div class="alert text-right" id="AlertMsg" role="alert" dir="rtl">
+                                <h5 class="font-weight-bold">نتائج تحليل الاستخدام : </h5>
+                                <ul  class="m-0">
+                                    <li>
+                                        الاستخدام
+                                        <span id="IsFair"></span>
+                                        و ستستمر الباقة حتى يوم
+                                        <span id="MayEndAt"></span>
+                                    </li>
+                                    <li> 
+                                        يجب استخدم
+                                        <span id="AvrRemain"></span>
+                                        جيجابايت يوميا لتستمر الباقة لنهاية الفترة
+                                    </li>
+                                </ul>
+
+
                             </div>
 
 
@@ -191,7 +218,7 @@
                 var StartDate = $('#StartDate').val();
                 var TotalData = $('#TotalData').val();
                 var UsedData = $('#UsedData').val();
- 
+
                 if (StartDate != "" && EndDate != "" && TotalData != "" && UsedData != "") {
                     var item = {
                         StartDate: StartDate,
@@ -245,7 +272,7 @@
                 var UsedData = $('#UsedData').val();
                 var RemainData = $('#RemainData').val();
 
- 
+
                 if (StartDate != "" && EndDate != "" && TotalData != "" && UsedData != "") {
 
 
@@ -274,23 +301,29 @@
                     //MonthlyProg 
 
                     $('#MonthlyProg').width(((UsedData / TotalData) * 100) + "%");
+                    $('#MonthlyProg').html(((UsedData / TotalData) * 100).toFixed(2) + "%");
                     $('#MonthlyProg').attr('aria-valuenow', (UsedData / TotalData) * 100);
 
                     //DailyProg
                     $('#DailyProg').width(((AvrUsed / AvrTotal) * 100) + "%");
+                    $('#DailyProg').html(((AvrUsed / AvrTotal) * 100).toFixed(2) + "%");
                     $('#DailyProg').attr('aria-valuenow', (AvrUsed / AvrTotal) * 100);
 
                     $('#MayEndAt').html(MayEndAt);
+                    $('#AvrRemain').html(AvrRemain);
 
                     if (Status >= 0) {
                         $('#IsFair').html('عادل');
+                        $('#AlertMsg').removeClass('alert-danger');
                         $('#AlertMsg').addClass('alert-success');
 
 
 
                     } else {
                         $('#IsFair').html('غير عادل');
+                        $('#AlertMsg').removeClass('alert-success');
                         $('#AlertMsg').addClass('alert-danger');
+
                     }
 
 
@@ -311,6 +344,8 @@
 
 
         </script>
+   
+   <script src="app.js"></script>
 
 </body>
 

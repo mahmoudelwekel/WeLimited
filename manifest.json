@@ -1,0 +1,16 @@
+{
+  "name": "WeLimited",
+  "short_name": "WeLimited",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#FFFFFF",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/Logo.png",
+      "type": "image/png", "sizes": "400x400"
+    }
+   
+  ]
+}
