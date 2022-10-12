@@ -1,0 +1,317 @@
+﻿<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="Logo.png" type="image/png">
+
+    <title>WeLimited</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+    <!-- Fontawesome library -->
+    <link href="https://fonts.googleapis.com/css?family=Cairo" rel="stylesheet">
+
+    <!-- Fontawesome library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+
+    <style>
+        html,
+        body {
+            margin: 0px;
+            padding: 0px;
+            font-family: 'Cairo', sans-serif;
+            background-attachment: fixed;
+        }
+
+        .fixed-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .darkmode-layer,
+        .darkmode-toggle {
+            z-index: 500;
+        }
+    </style>
+
+    <!--<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.0/lib/darkmode-js.min.js"></script>-->
+
+</head>
+
+<body style="align-content:center">
+    <div class="fixed-bg py-5"
+        style="background-image: url('https://source.unsplash.com/featured/?internet');min-height:100vh;">
+
+
+
+        <div class="container py-5 ">
+            <div class="row mx-2 d-flex justify-content-center">
+                <div class="col-md-6 border border-primary rounded py-4  font-weight-bold text-primary "
+                    style="background-color:white;opacity:.85!important;">
+                    <h3 class="animated fadeInUp text-center">
+                        <i class="fas fa-wifi"></i>
+                        WeLimited
+                    </h3>
+                    <hr />
+                    <div id="UserData" class="text-right">
+                        <div class="form-group">
+                            <label for="StartDate">تاريخ البداية</label>
+                            <input type="date" class="form-control" id="StartDate" onchange="CalculateEndDate();"
+                                required aria-describedby="StartDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="EndDate">تاريخ النهاية</label>
+                            <input type="date" class="form-control" id="EndDate" readonly required
+                                aria-describedby="EndDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="TotalData">اجمالى الباقة</label>
+                            <input type="number" class="form-control" id="TotalData" min="0"
+                                onchange="CalculateRemain();" required aria-describedby="TotalData"
+                                placeholder="اجمالى الباقة بالجيجابايت">
+                        </div>
+                        <div class="form-group">
+                            <label for="UsedData">المستخدم من الباقة</label>
+                            <input type="number" class="form-control" id="UsedData" min="0"
+                                onchange="CalculateRemain();" required aria-describedby="UsedData"
+                                placeholder="المستخدم من الباقة بالجيجابايت">
+                        </div>
+                        <div class="form-group">
+                            <label for="RemainData">المتبقى من الباقة</label>
+                            <input type="number" class="form-control" id="RemainData" readonly required
+                                aria-describedby="RemainData" placeholder="المتبقى من الباقة بالجيجابايت">
+                        </div>
+
+
+
+
+
+                        <button type="button" id="StartAnalysis" class="btn btn-primary w-100">اضغط لتحليل
+                            الاستخدام</button>
+
+                        </form>
+
+                        <div style="display: none;" id="ReportDiv">
+
+                            <hr>
+                            <div class="form-group ">
+                                <label for="RemainData">الاستخدام الشهرى :
+                                    <span id="UsedDataspan"></span>
+                                    /
+                                    <span id="TotalDataspan"></span>
+                                </label>
+                                <div class="progress " dir="rtl">
+                                    <div class="progress-bar" id="MonthlyProg" role="progressbar" style="width: 100%"
+                                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="RemainData">معدل الاستخدام اليومى :
+                                    <span id="AvrUsed"></span>
+                                    /
+                                    <span id="AvrTotal"></span>
+
+                                </label>
+                                <div class="progress" dir="rtl">
+                                    <div class="progress-bar" id="DailyProg" role="progressbar" style="width: 100%"
+                                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="alert text-center" id="AlertMsg" role="alert">
+                                <span></span>
+                                الاستخدام
+                                <span id="IsFair"></span>
+                                و ستستمر الباقة فى العمل حتى يوم
+                                <span id="MayEndAt"></span>
+                            </div>
+
+
+                        </div>
+                        <hr />
+                        <p class="font-weight-bold text-center m-0">
+
+                            <a href="https://www.facebook.com/Gipsy.EG" class="font-weight-bold text-center ">Powered By
+                                Gipsy</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+
+
+        <script>
+
+            function CalculateEndDate() {
+                var StartDate = $('#StartDate').val();
+                $('#EndDate').attr('min', StartDate);
+                $('#EndDate').val(moment(StartDate).add(30, 'days').format('YYYY-MM-DD'));
+            }
+
+
+            function CalculateRemain() {
+                var TotalData = $('#TotalData').val();
+                var UsedData = $('#UsedData').val();
+                $('#UsedData').attr('max', TotalData);
+                $('#RemainData').val(TotalData - UsedData);
+            }
+
+
+            function SetUserDate() {
+                var StartDate = $('#StartDate').val();
+                var TotalData = $('#TotalData').val();
+                var UsedData = $('#UsedData').val();
+ 
+                if (StartDate != "" && EndDate != "" && TotalData != "" && UsedData != "") {
+                    var item = {
+                        StartDate: StartDate,
+                        TotalData: TotalData,
+                        UsedData: UsedData,
+                        LastUpdate: moment().format('YYYY-MM-DD h:mm:ss')
+                    };
+
+                    localStorage.setItem("WeLimitedUserDate", JSON.stringify(item));
+
+                    StartAnalysis();
+
+                } else {
+                    alert('أملاء البيانات بشكل صحيح');
+                }
+            }
+
+
+            function GetUserDate() {
+                var UserDate = JSON.parse(localStorage.getItem("WeLimitedUserDate"));
+                if (UserDate != null) {
+                    $('#StartDate').val(UserDate.StartDate);
+                    $('#TotalData').val(UserDate.TotalData);
+                    $('#UsedData').val(UserDate.UsedData);
+
+
+                    if (moment(UserDate.LastUpdate).format('YYYY-MM-DD') != moment().format('YYYY-MM-DD')) {
+
+                        var Used = prompt("ادخل أخر استهلاك للباقة بالجيجابايت : ");
+                        if (Used != null && Used < UserDate.TotalData) {
+                            $('#UsedData').val(Used);
+                        }
+
+                    }
+                    CalculateRemain();
+                    CalculateEndDate();
+                    SetUserDate()
+                }
+
+
+            }
+
+
+            function StartAnalysis() {
+
+                $('#ReportDiv').show();
+
+                var StartDate = $('#StartDate').val();
+                var EndDate = $('#EndDate').val();
+                var TotalData = $('#TotalData').val();
+                var UsedData = $('#UsedData').val();
+                var RemainData = $('#RemainData').val();
+
+ 
+                if (StartDate != "" && EndDate != "" && TotalData != "" && UsedData != "") {
+
+
+                    $('#TotalDataspan').html(TotalData);
+                    $('#UsedDataspan').html(UsedData);
+
+
+
+                    var TotalDays = 30;
+                    var UsedDays = moment.duration(moment().diff(moment(StartDate))).asDays().toFixed(2);
+                    var RemainDays = TotalDays - UsedDays;
+
+
+
+                    var AvrTotal = (TotalData / TotalDays).toFixed(2);
+                    var AvrUsed = (UsedData / UsedDays).toFixed(2);
+                    var AvrRemain = (RemainData / RemainDays).toFixed(2);
+
+                    $('#AvrTotal').html(AvrTotal);
+                    $('#AvrUsed').html(AvrUsed);
+
+                    var Status = (RemainData - (AvrUsed * RemainDays)).toFixed(2);
+                    var DaysToConsumeStatus = (Status / AvrUsed).toFixed(2);
+                    var MayEndAt = moment(EndDate).add(DaysToConsumeStatus * 24, 'Hours').format('YYYY-MM-DD');
+
+                    //MonthlyProg 
+
+                    $('#MonthlyProg').width(((UsedData / TotalData) * 100) + "%");
+                    $('#MonthlyProg').attr('aria-valuenow', (UsedData / TotalData) * 100);
+
+                    //DailyProg
+                    $('#DailyProg').width(((AvrUsed / AvrTotal) * 100) + "%");
+                    $('#DailyProg').attr('aria-valuenow', (AvrUsed / AvrTotal) * 100);
+
+                    $('#MayEndAt').html(MayEndAt);
+
+                    if (Status >= 0) {
+                        $('#IsFair').html('عادل');
+                        $('#AlertMsg').addClass('alert-success');
+
+
+
+                    } else {
+                        $('#IsFair').html('غير عادل');
+                        $('#AlertMsg').addClass('alert-danger');
+                    }
+
+
+
+                }
+            }
+
+
+            $(document).ready(function () {
+                GetUserDate();
+            });
+
+
+            $('#StartAnalysis').click(function () {
+                SetUserDate();
+            });
+
+
+
+        </script>
+
+</body>
+
+</html>
