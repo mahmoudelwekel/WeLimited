@@ -11,7 +11,7 @@
 
     <link rel="manifest" href="manifest.json" />
     <!-- ios support -->
-    <link rel="apple-touch-icon" href="Logo.png" /> 
+    <link rel="apple-touch-icon" href="Logo.png" />
     <meta name="apple-mobile-web-app-status-bar" content="#ffffff" />
     <meta name="theme-color" content="#ffffff" />
 
@@ -77,11 +77,7 @@
                             <input type="date" class="form-control" id="StartDate" onchange="CalculateEndDate();"
                                 required aria-describedby="StartDate">
                         </div>
-                        <div class="form-group">
-                            <label for="EndDate">تاريخ انتهاء الباقة</label>
-                            <input type="date" class="form-control" id="EndDate" readonly required
-                                aria-describedby="EndDate">
-                        </div>
+
                         <div class="form-group">
                             <label for="TotalData">اجمالى الباقة</label>
                             <input type="number" class="form-control" id="TotalData" min="0"
@@ -95,9 +91,15 @@
                                 placeholder="المستخدم من الباقة بالجيجابايت">
                         </div>
                         <div class="form-group">
-                            <label for="RemainData">المتبقى من الباقة</label>
-                            <input type="number" class="form-control" id="RemainData" readonly required
-                                aria-describedby="RemainData" placeholder="المتبقى من الباقة بالجيجابايت">
+                            <label for="EndDate" dir="rtl">تاريخ انتهاء الباقة :
+                                <span id="EndDate"></span>
+                            </label>
+                        </div>
+                        <div class="form-group" dir="rtl">
+                            <label for="RemainData">المتبقى من الباقة :
+                                <span id="RemainData"></span>
+
+                            </label>
                         </div>
 
 
@@ -112,40 +114,48 @@
                         <div style="display: none;" id="ReportDiv">
 
                             <hr>
-                            <div class="form-group ">
-                                <label for="RemainData">الاستخدام الشهرى :
-                                    <span id="UsedDataspan"></span>
-                                    /
-                                    <span id="TotalDataspan"></span>
-                                </label>
-                                <div class="progress " dir="rtl">
-                                    <div class="progress-bar" id="MonthlyProg" role="progressbar" style="width: 100%"
-                                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="RemainData">معدل الاستخدام اليومى :
-                                    <span id="AvrUsed"></span>
-                                    /
-                                    <span id="AvrTotal"></span>
-
-                                </label>
-                                <div class="progress" dir="rtl">
-                                    <div class="progress-bar" id="DailyProg" role="progressbar" style="width: 100%"
-                                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
                             <div class="alert text-right" id="AlertMsg" role="alert" dir="rtl">
                                 <h5 class="font-weight-bold">نتائج تحليل الاستخدام : </h5>
-                                <ul  class="m-0">
+
+
+
+                                <ul class="m-0">
+                                    <li>
+                                        <div class="form-group ">
+                                            <label for="RemainData">الاستخدام الشهرى :
+                                                <span id="UsedDataspan"></span>
+                                                /
+                                                <span id="TotalDataspan"></span>
+                                            </label>
+                                            <div class="progress " dir="rtl">
+                                                <div class="progress-bar" id="MonthlyProg" role="progressbar"
+                                                    style="width: 100%" aria-valuenow="100" aria-valuemin="0"
+                                                    aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="form-group">
+                                            <label for="RemainData">معدل الاستخدام اليومى :
+                                                <span id="AvrUsed"></span>
+                                                /
+                                                <span id="AvrTotal"></span>
+
+                                            </label>
+                                            <div class="progress" dir="rtl">
+                                                <div class="progress-bar" id="DailyProg" role="progressbar"
+                                                    style="width: 100%" aria-valuenow="100" aria-valuemin="0"
+                                                    aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                    </li>
                                     <li>
                                         الاستخدام
                                         <span id="IsFair"></span>
                                         و ستستمر الباقة حتى يوم
                                         <span id="MayEndAt"></span>
                                     </li>
-                                    <li> 
+                                    <li>
                                         يجب استخدم
                                         <span id="AvrRemain"></span>
                                         جيجابايت يوميا لتستمر الباقة لنهاية الفترة
@@ -195,7 +205,7 @@
             function CalculateEndDate() {
                 var StartDate = $('#StartDate').val();
                 $('#EndDate').attr('min', StartDate);
-                $('#EndDate').val(moment(StartDate).add(30, 'days').format('YYYY-MM-DD'));
+                $('#EndDate').html(moment(StartDate).add(30, 'days').format('YYYY-MM-DD'));
             }
 
 
@@ -203,7 +213,7 @@
                 var TotalData = $('#TotalData').val();
                 var UsedData = $('#UsedData').val();
                 $('#UsedData').attr('max', TotalData);
-                $('#RemainData').val(TotalData - UsedData);
+                $('#RemainData').html(TotalData - UsedData);
             }
 
 
@@ -260,10 +270,10 @@
                 $('#ReportDiv').show();
 
                 var StartDate = $('#StartDate').val();
-                var EndDate = $('#EndDate').val();
                 var TotalData = $('#TotalData').val();
                 var UsedData = $('#UsedData').val();
-                var RemainData = $('#RemainData').val();
+                var EndDate = $('#EndDate').html();
+                var RemainData = $('#RemainData').html();
 
 
                 if (StartDate != "" && EndDate != "" && TotalData != "" && UsedData != "") {
@@ -337,8 +347,8 @@
 
 
         </script>
-   
-   <script src="app.js"></script>
+
+        <script src="app.js"></script>
 
 </body>
 
