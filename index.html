@@ -90,17 +90,6 @@
                                 onchange="CalculateRemain();" required aria-describedby="UsedData"
                                 placeholder="المستخدم من الباقة بالجيجابايت">
                         </div>
-                        <div class="form-group">
-                            <label for="EndDate" dir="rtl">تاريخ انتهاء الباقة :
-                                <span id="EndDate"></span>
-                            </label>
-                        </div>
-                        <div class="form-group" dir="rtl">
-                            <label for="RemainData">المتبقى من الباقة :
-                                <span id="RemainData"></span>
-
-                            </label>
-                        </div>
 
 
 
@@ -111,58 +100,63 @@
 
                         </form>
 
-                        <div style="display: none;" id="ReportDiv">
+                        <div style="display: none;" class="mt-3"  id="ReportDiv">
 
-                            <hr>
-                            <div class="alert text-right" id="AlertMsg" role="alert" dir="rtl">
+                             <div class="alert text-right" id="AlertMsg" role="alert" dir="rtl">
                                 <h5 class="font-weight-bold">نتائج تحليل الاستخدام : </h5>
-
-
 
                                 <ul class="m-0">
                                     <li>
-                                        <div class="form-group ">
-                                            <label for="RemainData">الاستخدام الشهرى :
-                                                <span id="UsedDataspan"></span>
-                                                /
-                                                <span id="TotalDataspan"></span>
-                                            </label>
-                                            <div class="progress " dir="rtl">
-                                                <div class="progress-bar" id="MonthlyProg" role="progressbar"
-                                                    style="width: 100%" aria-valuenow="100" aria-valuemin="0"
-                                                    aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-group">
-                                            <label for="RemainData">معدل الاستخدام اليومى :
-                                                <span id="AvrUsed"></span>
-                                                /
-                                                <span id="AvrTotal"></span>
-
-                                            </label>
-                                            <div class="progress" dir="rtl">
-                                                <div class="progress-bar" id="DailyProg" role="progressbar"
-                                                    style="width: 100%" aria-valuenow="100" aria-valuemin="0"
-                                                    aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
                                         الاستخدام
                                         <span id="IsFair"></span>
-                                        و ستستمر الباقة حتى يوم
+                                    </li>
+                                    <li>
+                                        المتبقى من الباقة :
+                                        <span id="RemainData"></span>
+
+                                    </li>
+                                    <li class="d-none">
+                                        تاريخ تجديد الباقة :
+                                        <span id="EndDate"></span>
+                                    </li>
+                                    <li>
+                                        
+                                        تاريخ انتهاء الباقة :
                                         <span id="MayEndAt"></span>
                                     </li>
                                     <li>
-                                        يجب استخدم
+                                        يجب استخدام
                                         <span id="AvrRemain"></span>
-                                        جيجابايت يوميا لتستمر الباقة لنهاية الفترة
+                                        GB يومياً لتستمر الباقة لنهاية الفترة
                                     </li>
                                 </ul>
+                                <hr>
 
+                                <div class=" ">
+                                    <label for="RemainData">الاستخدام الشهرى :
+                                        <span id="UsedDataspan"></span>
+                                        /
+                                        <span id="TotalDataspan"></span>
+                                    </label>
+                                    <div class="progress " dir="rtl">
+                                        <div class="progress-bar" id="MonthlyProg" role="progressbar"
+                                            style="width: 100%" aria-valuenow="100" aria-valuemin="0"
+                                            aria-valuemax="100"></div>
+                                    </div>
+                                </div>
 
+                                <div class="mt-3">
+                                    <label for="RemainData">معدل الاستخدام اليومى :
+                                        <span id="AvrUsed"></span>
+                                        /
+                                        <span id="AvrTotal"></span>
+
+                                    </label>
+                                    <div class="progress" dir="rtl">
+                                        <div class="progress-bar" id="DailyProg" role="progressbar" style="width: 100%"
+                                            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
                             </div>
 
 
