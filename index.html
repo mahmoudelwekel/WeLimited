@@ -207,7 +207,7 @@
                 var TotalData = $('#TotalData').val();
                 var UsedData = $('#UsedData').val();
                 $('#UsedData').attr('max', TotalData);
-                $('#RemainData').html(TotalData - UsedData);
+                $('#RemainData').html((TotalData - UsedData).toFixed(2));
             }
 
 
